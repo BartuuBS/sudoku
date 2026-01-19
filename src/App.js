@@ -42,7 +42,7 @@ const handleSolve = async () => {
     const data = await res.json();
 
     if (data.error) {
-      alert("❌ Bu Sudoku çözülemez!");
+      console.log("Bu sudoku çözülemez");
       return;
     }
 
