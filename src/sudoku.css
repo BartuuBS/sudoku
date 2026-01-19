@@ -57,3 +57,11 @@
     color: #999;
     text-align: center;
 }
+.error-message {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #ffe5e5;
+  color: #b00020;
+  border-radius: 8px;
+  font-weight: 500;
+}

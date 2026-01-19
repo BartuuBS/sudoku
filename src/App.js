@@ -31,7 +31,10 @@ function SudokuGrid() {
   };
 
   const API_URL = process.env.REACT_APP_API_URL;
+  const [errorMessage, setErrorMessage] = useState("");
 const handleSolve = async () => {
+  setErrorMessage("");
+
   try {
     const res = await fetch(`${API_URL}/solve`, {
       method: "POST",
@@ -42,13 +45,13 @@ const handleSolve = async () => {
     const data = await res.json();
 
     if (data.error) {
-      console.log("Bu sudoku çözülemez");
+      setErrorMessage("This sudoku cannot be solved");
       return;
     }
 
     setGrid(data.solution);
-  } catch (err) {
-    alert("⚠️ Backend bağlantı hatası");
+  } catch {
+    setErrorMessage("Backend connection error, wait for a minute to reconnect the server");
   }
 };
   
@@ -59,7 +62,14 @@ const handleSolve = async () => {
 };
 
   return (
+    
     <div className="sudoku-wrapper">
+      {errorMessage && (
+  <div className="error-message">
+    {errorMessage}
+  </div>
+)}
+
       <div className="sudoku-grid">
         {grid.map((row, r) =>
           row.map((cell, c) => (
@@ -85,6 +95,7 @@ function SudokuPage() {
     <>
       <h1 className="h1 title">Sudoku Solver</h1>
       <SudokuGrid />
+      
     </>
   );
 }
