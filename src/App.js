@@ -1,25 +1,96 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import { useState } from "react";
+import "./sudoku.css";
+function Cell({ value, onChange }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <input
+      type="text"
+      value={value === 0 ? "" : value}
+      maxLength={1}
+      inputMode="numeric"
+      className="sudoku-cell"
+      onChange={(e) => {
+        const v = e.target.value;
+        if (!/^[1-9]?$/.test(v)) return;
+        onChange(v === "" ? 0 : Number(v));
+      }}
+    />
+  );
+}
+
+function SudokuGrid() {
+  const [grid, setGrid] = useState(
+    Array.from({ length: 9 }, () => Array(9).fill(0))
+  );
+
+  const updateCell = (row, col, value) => {
+    setGrid((prev) => {
+      const copy = prev.map((r) => [...r]);
+      copy[row][col] = value;
+      return copy;
+    });
+  };
+
+  const API_URL = process.env.REACT_APP_API_URL;
+  const handleSolve = async () => {
+    try {
+      const response = await fetch(`${API_URL}/solve`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ grid }),
+  });
+
+      const data = await response.json();
+
+      if (data.solution) {
+        setGrid(data.solution);
+      } else {
+        alert("Sudoku çözülemedi");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Backend bağlantı hatası");
+    }
+  };
+  
+  const handleReset = () => {
+  setGrid(
+    Array.from({ length: 9 }, () => Array(9).fill(0))
+  );
+};
+
+  return (
+    <div className="sudoku-wrapper">
+      <div className="sudoku-grid">
+        {grid.map((row, r) =>
+          row.map((cell, c) => (
+            <Cell
+              key={`${r}-${c}`}
+              value={cell}
+              onChange={(v) => updateCell(r, c, v)}
+            />
+          ))
+        )}
+      </div>
+
+<div style={{ marginTop: "24px", display: "flex", gap: "12px" }}>
+<p></p><button onClick={handleSolve}>Solve</button>
+ <p></p><button onClick={handleReset}>Reset</button>
+</div>
     </div>
   );
 }
 
-export default App;
+function SudokuPage() {
+  return (
+    <>
+      <h1 className="h1 title">Sudoku Solver</h1>
+      <SudokuGrid />
+    </>
+  );
+}
+console.log("API URL:", process.env.REACT_APP_API_URL);
+
+export default SudokuPage;
+
+
+console.log("API URL:", process.env.REACT_APP_API_URL);

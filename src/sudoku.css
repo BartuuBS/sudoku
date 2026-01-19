@@ -1,0 +1,59 @@
+:root {
+    background-color: darkslategray;
+}
+.sudoku-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sudoku-grid {
+  width: min(90vw, 420px); /* MOBİLDE %90, DESKTOPTA 420px */
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  aspect-ratio: 1 / 1; /* KARE */
+  margin-top: 10px;
+}
+
+/* Hücre */
+.sudoku-cell {
+  width: 100%;
+  height: 100%;
+  font-size: clamp(16px, 4vw, 22px);
+  text-align: center;
+  border: 1px solid #999;
+  box-sizing: border-box;
+}
+
+/* 3x3 blok çizgileri */
+.sudoku-cell:nth-child(3n) {
+  border-right: 3px solid #000;
+}
+.sudoku-cell:nth-child(9n+1) {
+  border-left: 3px solid #000;
+}
+.sudoku-cell:nth-child(-n+9){
+    border-top: 3px solid #000;
+}
+.sudoku-cell:nth-child(n+73):nth-child(-n+81),
+.sudoku-cell:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-cell:nth-child(n + 46):nth-child(-n + 54) {
+  border-bottom: 3px solid #000;
+}
+
+/* Focus */
+.sudoku-cell:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.h1 {
+    font-size: larger;
+}
+.title {
+    font-size:xx-large;
+    color: #999;
+    text-align: center;
+}
