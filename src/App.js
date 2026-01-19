@@ -31,26 +31,26 @@ function SudokuGrid() {
   };
 
   const API_URL = process.env.REACT_APP_API_URL;
-  const handleSolve = async () => {
-    try {
-      const response = await fetch(`${API_URL}/solve`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ grid }),
-  });
+const handleSolve = async () => {
+  try {
+    const res = await fetch(`${API_URL}/solve`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ grid }),
+    });
 
-      const data = await response.json();
+    const data = await res.json();
 
-      if (data.solution) {
-        setGrid(data.solution);
-      } else {
-        alert("Sudoku çözülemedi");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Backend bağlantı hatası");
+    if (data.error) {
+      alert("❌ Bu Sudoku çözülemez!");
+      return;
     }
-  };
+
+    setGrid(data.solution);
+  } catch (err) {
+    alert("⚠️ Backend bağlantı hatası");
+  }
+};
   
   const handleReset = () => {
   setGrid(
