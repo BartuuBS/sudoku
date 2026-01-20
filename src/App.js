@@ -99,9 +99,7 @@ function SudokuPage() {
     </>
   );
 }
-console.log("API URL:", process.env.REACT_APP_API_URL);
 
 export default SudokuPage;
 
 
-console.log("API URL:", process.env.REACT_APP_API_URL);
