@@ -5,9 +5,12 @@ It provides a user-friendly interface where users can enter a Sudoku board and r
 
 The frontend is built with **React** and deployed on **GitHub Pages**, communicating with a FastAPI backend.
 
+
+
 ## ⚠️ Warning
 
 On the first request, the server may take up to a minute to wake up due to cold start behavior on Render’s free tier.
+
 
 
 ## 🌐 Live Demo
@@ -27,6 +30,7 @@ The backend API for this project is available here:
 -  Sends Sudoku data to the backend API  
 -  Displays the solved board returned by the server  
 -  Simple and responsive UI  
+
 
 
 ## 🛠️ Technologies Used
