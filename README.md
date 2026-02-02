@@ -9,20 +9,18 @@ The frontend is built with **React** and deployed on **GitHub Pages**, communica
 
 On the first request, the server may take up to a minute to wake up due to cold start behavior on Render’s free tier.
 
----
 
 ## 🌐 Live Demo
 
 👉 https://bartuubs.github.io/sudoku
 
----
 
 ## 🔗 Backend Repository
 
 The backend API for this project is available here:  
 👉 https://github.com/bartuubs/sudoku_backend
 
----
+
 
 ## 🚀 Features
 -  Interactive Sudoku board input  
@@ -30,7 +28,6 @@ The backend API for this project is available here:
 -  Displays the solved board returned by the server  
 -  Simple and responsive UI  
 
----
 
 ## 🛠️ Technologies Used
 
@@ -47,4 +44,4 @@ The backend API for this project is available here:
 ### Deployment
 - Render (backend)
 - GitHub Pages (frontend)
----
+
